@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/lab04/error-event.schema.json",
+  "type": "object",
+  "required": ["schema_version", "event_time", "repo_id", "file_id", "run_id", "content_hash", "event_id", "op", "error"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "event_time": {"type": "string", "format": "date-time"},
+    "repo_id": {"type": "string", "minLength": 1},
+    "file_id": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "run_id": {"type": "string", "minLength": 1},
+    "content_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "event_id": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "op": {"const": "error"},
+    "error": {"type": "object", "required": ["id", "stage", "exception_type", "message", "recoverable"], "additionalProperties": true}
+  },
+  "additionalProperties": false
+}
+

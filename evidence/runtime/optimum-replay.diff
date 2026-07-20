@@ -1,0 +1,15 @@
+diff --git a/optimum/version.py b/optimum/version.py
+index bb061c5..a41eacc 100644
+--- a/optimum/version.py
++++ b/optimum/version.py
+@@ -13,3 +13,10 @@
+ #  limitations under the License.
+
+ __version__ = "2.2.0.dev0"
++
++
++def lab04_replay_probe(value):
++    """Small deterministic branch used only by the Lab 04 replay demo."""
++    if value > 10:
++        return value * 2
++    return value

@@ -1,0 +1,21 @@
+{
+  "connector.class": "org.neo4j.connectors.kafka.sink.Neo4jConnector",
+  "tasks.max": "1",
+  "topics": "cpg.nodes.v1,cpg.edges.v1",
+  "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+  "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+  "value.converter.schemas.enable": "false",
+  "neo4j.uri": "bolt://neo4j:7687",
+  "neo4j.database": "neo4j",
+  "neo4j.authentication.type": "BASIC",
+  "neo4j.authentication.basic.username": "neo4j",
+  "neo4j.authentication.basic.password": "${env:LAB04_NEO4J_PASSWORD}",
+  "neo4j.cypher.topic.cpg.nodes.v1": "WITH __value AS event FOREACH (_ IN CASE WHEN event.op = 'upsert' THEN [1] ELSE [] END | MERGE (node:CPGNode {id: event.node.id}) SET node += event.node) WITH event OPTIONAL MATCH (obsolete:CPGNode {id: event.node.id}) WHERE event.op = 'delete' DETACH DELETE obsolete",
+  "neo4j.cypher.topic.cpg.edges.v1": "WITH __value AS event FOREACH (_ IN CASE WHEN event.op = 'upsert' THEN [1] ELSE [] END | MERGE (source:CPGNode {id: event.edge.source_id}) ON CREATE SET source.kind = 'PLACEHOLDER' MERGE (target:CPGNode {id: event.edge.target_id}) ON CREATE SET target.kind = 'PLACEHOLDER' MERGE (source)-[edge:CPG_EDGE {id: event.edge.id}]->(target) SET edge += event.edge) WITH event OPTIONAL MATCH ()-[obsolete:CPG_EDGE {id: event.edge.id}]->() WHERE event.op = 'delete' DELETE obsolete",
+  "errors.tolerance": "all",
+  "errors.log.enable": "true",
+  "errors.log.include.messages": "true",
+  "errors.deadletterqueue.topic.name": "cpg.neo4j-dlq.v1",
+  "errors.deadletterqueue.topic.replication.factor": "1",
+  "errors.deadletterqueue.context.headers.enable": "true"
+}

@@ -1,0 +1,24 @@
+version: 1
+
+project:
+  title: "Lab 04 - Incremental CPG Streaming"
+  description: "Kafka, Neo4j, Spark Structured Streaming, and MongoDB"
+  authors:
+    - name: "Lab 04 Team"
+  license: MIT
+  toc:
+    - file: book/index.md
+    - file: book/architecture.ipynb
+    - file: book/task1_repository.ipynb
+    - file: book/task2_parser.ipynb
+    - file: book/task3_kafka.ipynb
+    - file: book/task4_neo4j.ipynb
+    - file: book/task5_mongodb.ipynb
+    - file: book/task6_replay.ipynb
+
+site:
+  template: book-theme
+  options:
+    logo_text: "Lab 04 CPG Streaming"
+    folders: true
+

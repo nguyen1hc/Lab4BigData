@@ -1,0 +1,37 @@
+{
+  "repository": {
+    "url": "https://github.com/huggingface/optimum",
+    "commit_sha": "a6c775e11118d62712057bd3a8c5649898a5312d",
+    "raw_python_files": 74,
+    "processed_python_files": 61,
+    "python_lines": 13807,
+    "parseable_files": 61,
+    "parse_success_rate": 1.0
+  },
+  "baseline": {
+    "neo4j_nodes": 62375,
+    "neo4j_edges": 77819,
+    "mongodb_documents": 61
+  },
+  "modified_and_replayed": {
+    "neo4j_nodes": 62397,
+    "neo4j_unique_node_ids": 62397,
+    "neo4j_edges": 77849,
+    "neo4j_unique_edge_ids": 77849,
+    "edge_kinds": {
+      "AST": 57960,
+      "CFG": 7248,
+      "DFG": 10048,
+      "CALL": 2593
+    },
+    "mongodb_documents": 61,
+    "mongodb_distinct_file_ids": 61,
+    "replay_file": "optimum/version.py",
+    "replay_file_nodes": 29,
+    "replay_file_edges": 36,
+    "stale_edges_deleted_on_change": 1,
+    "spark_checkpoint_offset_before_restart_replay": 134,
+    "spark_checkpoint_offset_after_restart_replay": 136,
+    "neo4j_dlq_end_offset": 0
+  }
+}
