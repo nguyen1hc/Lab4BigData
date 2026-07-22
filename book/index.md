@@ -24,11 +24,11 @@ filtered evidence.
 
 ## Current verified pipeline
 
-- Parser and JSON contract tests: **10 passed**.
+- Parser, JSON contract, and evidence tests: **13 passed**.
 - Neo4j sink connector and task: **RUNNING**.
 - Discovery: **74 raw / 61 processed Python files**, 13,807 lines, **100% parseable**.
 - Baseline graph: **62,375 nodes / 77,819 edges**, all IDs unique.
 - Modified and forced-replay graph: **62,397 nodes / 77,849 edges**, all IDs unique.
 - MongoDB: **61 documents / 61 distinct file IDs** after every replay.
-- Spark checkpoint: metadata offset advanced **126 -> 128** across restart.
+- Spark checkpoint: before/after offsets are generated from the current replay evidence in Task 6.
 - Neo4j dead-letter queue: **empty**.

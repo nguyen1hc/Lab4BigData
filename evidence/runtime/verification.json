@@ -1,37 +1,303 @@
 {
+  "schema_version": "2.0",
+  "captured_at": "2026-07-22T01:08:57.810878Z",
   "repository": {
-    "url": "https://github.com/huggingface/optimum",
+    "repo_id": "huggingface/optimum",
+    "url": "https://github.com/huggingface/optimum.git",
     "commit_sha": "a6c775e11118d62712057bd3a8c5649898a5312d",
     "raw_python_files": 74,
     "processed_python_files": 61,
-    "python_lines": 13807,
+    "baseline_python_lines": 13807,
+    "modified_python_lines": 13814,
     "parseable_files": 61,
     "parse_success_rate": 1.0
   },
-  "baseline": {
-    "neo4j_nodes": 62375,
-    "neo4j_edges": 77819,
-    "mongodb_documents": 61
+  "replay_file": {
+    "path": "optimum/version.py",
+    "file_id": "867c06c1f6e594bef9a16137312503a0870399626a16dded522ce7a24143b1a7",
+    "git_diff": "diff --git a/optimum/version.py b/optimum/version.py\nindex bb061c5..a41eacc 100644\n--- a/optimum/version.py\n+++ b/optimum/version.py\n@@ -13,3 +13,10 @@\n #  limitations under the License.\n \n __version__ = \"2.2.0.dev0\"\n+\n+\n+def lab04_replay_probe(value):\n+    \"\"\"Small deterministic branch used only by the Lab 04 replay demo.\"\"\"\n+    if value > 10:\n+        return value * 2\n+    return value",
+    "backup_path": "tmp\\replay-backups\\version-20260722-080605.py.bak"
   },
-  "modified_and_replayed": {
-    "neo4j_nodes": 62397,
-    "neo4j_unique_node_ids": 62397,
-    "neo4j_edges": 77849,
-    "neo4j_unique_edge_ids": 77849,
-    "edge_kinds": {
-      "AST": 57960,
-      "CFG": 7248,
-      "DFG": 10048,
-      "CALL": 2593
+  "connector_status": {
+    "name": "cpg-neo4j-sink",
+    "connector": {
+      "state": "RUNNING",
+      "worker_id": "connect:8083"
     },
-    "mongodb_documents": 61,
-    "mongodb_distinct_file_ids": 61,
-    "replay_file": "optimum/version.py",
-    "replay_file_nodes": 29,
-    "replay_file_edges": 36,
-    "stale_edges_deleted_on_change": 1,
-    "spark_checkpoint_offset_before_restart_replay": 134,
-    "spark_checkpoint_offset_after_restart_replay": 136,
-    "neo4j_dlq_end_offset": 0
+    "tasks": [
+      {
+        "id": 0,
+        "state": "RUNNING",
+        "worker_id": "connect:8083"
+      }
+    ],
+    "type": "sink"
+  },
+  "preflight_sync": {
+    "parser": {
+      "path": "optimum/version.py",
+      "file_id": "867c06c1f6e594bef9a16137312503a0870399626a16dded522ce7a24143b1a7",
+      "content_hash": "079eca803ea5bfe068bc805997b013cc14c9ddc8629a2ec634d12bcebb6720ce",
+      "status": "processed",
+      "nodes": 29,
+      "edges": 36,
+      "deleted_nodes": 0,
+      "deleted_edges": 0,
+      "warnings": 0,
+      "error": ""
+    },
+    "mongo_offset": 128
+  },
+  "stages": {
+    "baseline": {
+      "name": "baseline",
+      "captured_at": "2026-07-22T01:07:09.448445Z",
+      "source_hash": "ac342f9e8fd3f74b822e8d7399806be6f17b733b37e1a01ae24a486ba8d330ce",
+      "source_lines": 15,
+      "parser": {
+        "path": "optimum/version.py",
+        "file_id": "867c06c1f6e594bef9a16137312503a0870399626a16dded522ce7a24143b1a7",
+        "content_hash": "ac342f9e8fd3f74b822e8d7399806be6f17b733b37e1a01ae24a486ba8d330ce",
+        "status": "processed",
+        "nodes": 7,
+        "edges": 6,
+        "deleted_nodes": 22,
+        "deleted_edges": 31,
+        "warnings": 0,
+        "error": ""
+      },
+      "neo4j": {
+        "nodes": 62375,
+        "unique_nodes": 62375,
+        "edges": 77819,
+        "unique_edges": 77819,
+        "file_nodes": 7,
+        "file_edges": 6,
+        "edge_kinds": {
+          "AST": 57940,
+          "CALL": 2593,
+          "CFG": 7241,
+          "DFG": 10045
+        }
+      },
+      "mongo": {
+        "documents": 61,
+        "distinct_files": 61,
+        "document": {
+          "_id": "867c06c1f6e594bef9a16137312503a0870399626a16dded522ce7a24143b1a7",
+          "path": "optimum/version.py",
+          "content_hash": "ac342f9e8fd3f74b822e8d7399806be6f17b733b37e1a01ae24a486ba8d330ce",
+          "node_counts": {
+            "AST": 5,
+            "SYNTHETIC": 2
+          },
+          "edge_counts": {
+            "AST": 4,
+            "CFG": 2
+          },
+          "processed_at": "2026-07-22T01:06:48.951040Z",
+          "run_id": "c57bcc5030044d39ab029442fae4279e",
+          "kafka_offset": 130
+        },
+        "other_documents_count": 60,
+        "other_documents_digest": "8aa80ee9361d8a1e4caf27fc02ca9ed83677a9820e0b2dbe011d53cdaaea0303"
+      },
+      "kafka_metadata_end_offset": 132,
+      "spark_checkpoint_offset": 132
+    },
+    "modified": {
+      "name": "modified",
+      "captured_at": "2026-07-22T01:07:35.667801Z",
+      "source_hash": "079eca803ea5bfe068bc805997b013cc14c9ddc8629a2ec634d12bcebb6720ce",
+      "source_lines": 22,
+      "parser": {
+        "path": "optimum/version.py",
+        "file_id": "867c06c1f6e594bef9a16137312503a0870399626a16dded522ce7a24143b1a7",
+        "content_hash": "079eca803ea5bfe068bc805997b013cc14c9ddc8629a2ec634d12bcebb6720ce",
+        "status": "processed",
+        "nodes": 29,
+        "edges": 36,
+        "deleted_nodes": 0,
+        "deleted_edges": 1,
+        "warnings": 0,
+        "error": ""
+      },
+      "neo4j": {
+        "nodes": 62397,
+        "unique_nodes": 62397,
+        "edges": 77849,
+        "unique_edges": 77849,
+        "file_nodes": 29,
+        "file_edges": 36,
+        "edge_kinds": {
+          "AST": 57960,
+          "CALL": 2593,
+          "CFG": 7248,
+          "DFG": 10048
+        }
+      },
+      "mongo": {
+        "documents": 61,
+        "distinct_files": 61,
+        "document": {
+          "_id": "867c06c1f6e594bef9a16137312503a0870399626a16dded522ce7a24143b1a7",
+          "path": "optimum/version.py",
+          "content_hash": "079eca803ea5bfe068bc805997b013cc14c9ddc8629a2ec634d12bcebb6720ce",
+          "node_counts": {
+            "AST": 25,
+            "SYNTHETIC": 4
+          },
+          "edge_counts": {
+            "AST": 24,
+            "CFG": 9,
+            "DFG": 3
+          },
+          "processed_at": "2026-07-22T01:07:14.250465Z",
+          "run_id": "b8064c3b075045c3841f5e5cf6b0aac0",
+          "kafka_offset": 132
+        },
+        "other_documents_count": 60,
+        "other_documents_digest": "8aa80ee9361d8a1e4caf27fc02ca9ed83677a9820e0b2dbe011d53cdaaea0303"
+      },
+      "kafka_metadata_end_offset": 134,
+      "spark_checkpoint_offset": 134
+    },
+    "forced_unchanged": {
+      "name": "forced_unchanged",
+      "captured_at": "2026-07-22T01:08:01.049997Z",
+      "source_hash": "079eca803ea5bfe068bc805997b013cc14c9ddc8629a2ec634d12bcebb6720ce",
+      "source_lines": 22,
+      "parser": {
+        "path": "optimum/version.py",
+        "file_id": "867c06c1f6e594bef9a16137312503a0870399626a16dded522ce7a24143b1a7",
+        "content_hash": "079eca803ea5bfe068bc805997b013cc14c9ddc8629a2ec634d12bcebb6720ce",
+        "status": "processed",
+        "nodes": 29,
+        "edges": 36,
+        "deleted_nodes": 0,
+        "deleted_edges": 0,
+        "warnings": 0,
+        "error": ""
+      },
+      "neo4j": {
+        "nodes": 62397,
+        "unique_nodes": 62397,
+        "edges": 77849,
+        "unique_edges": 77849,
+        "file_nodes": 29,
+        "file_edges": 36,
+        "edge_kinds": {
+          "AST": 57960,
+          "CALL": 2593,
+          "CFG": 7248,
+          "DFG": 10048
+        }
+      },
+      "mongo": {
+        "documents": 61,
+        "distinct_files": 61,
+        "document": {
+          "_id": "867c06c1f6e594bef9a16137312503a0870399626a16dded522ce7a24143b1a7",
+          "path": "optimum/version.py",
+          "content_hash": "079eca803ea5bfe068bc805997b013cc14c9ddc8629a2ec634d12bcebb6720ce",
+          "node_counts": {
+            "AST": 25,
+            "SYNTHETIC": 4
+          },
+          "edge_counts": {
+            "AST": 24,
+            "CFG": 9,
+            "DFG": 3
+          },
+          "processed_at": "2026-07-22T01:07:40.785346Z",
+          "run_id": "f7b0dfb0cc15454ba74541cb89643b0f",
+          "kafka_offset": 134
+        },
+        "other_documents_count": 60,
+        "other_documents_digest": "8aa80ee9361d8a1e4caf27fc02ca9ed83677a9820e0b2dbe011d53cdaaea0303"
+      },
+      "kafka_metadata_end_offset": 136,
+      "spark_checkpoint_offset": 136
+    },
+    "restart_replay": {
+      "name": "restart_replay",
+      "captured_at": "2026-07-22T01:08:54.368050Z",
+      "source_hash": "079eca803ea5bfe068bc805997b013cc14c9ddc8629a2ec634d12bcebb6720ce",
+      "source_lines": 22,
+      "parser": {
+        "path": "optimum/version.py",
+        "file_id": "867c06c1f6e594bef9a16137312503a0870399626a16dded522ce7a24143b1a7",
+        "content_hash": "079eca803ea5bfe068bc805997b013cc14c9ddc8629a2ec634d12bcebb6720ce",
+        "status": "processed",
+        "nodes": 29,
+        "edges": 36,
+        "deleted_nodes": 0,
+        "deleted_edges": 0,
+        "warnings": 0,
+        "error": ""
+      },
+      "neo4j": {
+        "nodes": 62397,
+        "unique_nodes": 62397,
+        "edges": 77849,
+        "unique_edges": 77849,
+        "file_nodes": 29,
+        "file_edges": 36,
+        "edge_kinds": {
+          "AST": 57960,
+          "CALL": 2593,
+          "CFG": 7248,
+          "DFG": 10048
+        }
+      },
+      "mongo": {
+        "documents": 61,
+        "distinct_files": 61,
+        "document": {
+          "_id": "867c06c1f6e594bef9a16137312503a0870399626a16dded522ce7a24143b1a7",
+          "path": "optimum/version.py",
+          "content_hash": "079eca803ea5bfe068bc805997b013cc14c9ddc8629a2ec634d12bcebb6720ce",
+          "node_counts": {
+            "AST": 25,
+            "SYNTHETIC": 4
+          },
+          "edge_counts": {
+            "AST": 24,
+            "CFG": 9,
+            "DFG": 3
+          },
+          "processed_at": "2026-07-22T01:08:09.918576Z",
+          "run_id": "fb81462f6af147b5b74e33a33e1efa72",
+          "kafka_offset": 136
+        },
+        "other_documents_count": 60,
+        "other_documents_digest": "8aa80ee9361d8a1e4caf27fc02ca9ed83677a9820e0b2dbe011d53cdaaea0303"
+      },
+      "kafka_metadata_end_offset": 138,
+      "spark_checkpoint_offset": 138
+    }
+  },
+  "spark_restart": {
+    "checkpoint_before_restart": 136,
+    "checkpoint_after_replay": 138
+  },
+  "neo4j_dlq_end_offset": 0,
+  "assertions": {
+    "only_requested_file_processed": true,
+    "source_hash_changed": true,
+    "mongo_hash_matches_source": true,
+    "neo4j_counts_match_parser": true,
+    "modified_graph_changed": true,
+    "modified_emitted_stale_deletes": true,
+    "forced_replay_has_no_stale_elements": true,
+    "unchanged_replay_keeps_graph_counts": true,
+    "restart_replay_keeps_graph_counts": true,
+    "neo4j_ids_are_unique": true,
+    "mongo_has_one_document_per_file": true,
+    "unchanged_files_were_not_rewritten": true,
+    "mongo_offsets_advance": true,
+    "spark_consumed_each_stage": true,
+    "checkpoint_resumed_after_restart": true,
+    "neo4j_dlq_is_empty": true
   }
 }
