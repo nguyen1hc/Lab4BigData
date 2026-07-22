@@ -29,7 +29,11 @@ def code_cell(source: str):
 
 def evidence_sha256() -> str:
     path = ROOT / "evidence" / "runtime" / "verification.json"
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    canonical = json.dumps(
+        payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False
+    ).encode("utf-8")
+    return hashlib.sha256(canonical).hexdigest()
 
 
 def load_evidence() -> dict:

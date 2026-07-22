@@ -36,7 +36,10 @@ def main() -> int:
     assertions = evidence.get("assertions", {})
     if not assertions or not all(assertions.values()):
         raise AssertionError("Replay evidence is missing or contains failed assertions")
-    digest = hashlib.sha256(EVIDENCE.read_bytes()).hexdigest()
+    canonical = json.dumps(
+        evidence, sort_keys=True, separators=(",", ":"), ensure_ascii=False
+    ).encode("utf-8")
+    digest = hashlib.sha256(canonical).hexdigest()
 
     failures: list[str] = []
     for name in EXPECTED:
