@@ -410,7 +410,7 @@ print('PASS: Spark checkpoint has consumed the metadata topic')"""
             [
                 code_cell(mongo_source),
                 code_cell(checkpoint_source),
-                image_cell("mongodb-ui.png", "MongoDB UI showing the upserted source metadata document"),
+                image_cell("mongodb-ui.png", "MongoDB Compass capture at replay offset 126; the executable output above verifies the final live offset 136 and checkpoint 138"),
             ],
             "The checkpoint tracks Kafka progress rather than file hashes. MongoDB document and distinct-ID counts prove that repeated metadata events replace rather than duplicate a file document.",
         ),
