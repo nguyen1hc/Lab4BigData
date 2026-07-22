@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/lab04/replay-evidence.schema.json",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "captured_at",
+    "repository",
+    "replay_file",
+    "connector_status",
+    "stages",
+    "spark_restart",
+    "neo4j_dlq_end_offset",
+    "assertions"
+  ],
+  "properties": {
+    "schema_version": {"const": "2.0"},
+    "captured_at": {"type": "string", "format": "date-time"},
+    "repository": {
+      "type": "object",
+      "required": [
+        "repo_id", "url", "commit_sha", "raw_python_files",
+        "processed_python_files", "baseline_python_lines",
+        "modified_python_lines", "parseable_files", "parse_success_rate"
+      ]
+    },
+    "replay_file": {
+      "type": "object",
+      "required": ["path", "file_id", "git_diff"]
+    },
+    "connector_status": {"type": "object"},
+    "preflight_sync": {"type": "object"},
+    "stages": {
+      "type": "object",
+      "required": ["baseline", "modified", "forced_unchanged", "restart_replay"],
+      "additionalProperties": {"$ref": "#/$defs/stage"}
+    },
+    "spark_restart": {
+      "type": "object",
+      "required": ["checkpoint_before_restart", "checkpoint_after_replay"]
+    },
+    "neo4j_dlq_end_offset": {"type": "integer", "minimum": 0},
+    "assertions": {
+      "type": "object",
+      "minProperties": 16,
+      "additionalProperties": {"type": "boolean"}
+    }
+  },
+  "$defs": {
+    "stage": {
+      "type": "object",
+      "required": [
+        "name", "captured_at", "source_hash", "source_lines", "parser",
+        "neo4j", "mongo", "kafka_metadata_end_offset", "spark_checkpoint_offset"
+      ],
+      "properties": {
+        "source_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "source_lines": {"type": "integer", "minimum": 1},
+        "parser": {"type": "object"},
+        "neo4j": {"type": "object"},
+        "mongo": {"type": "object"},
+        "kafka_metadata_end_offset": {"type": "integer", "minimum": 0},
+        "spark_checkpoint_offset": {"type": "integer", "minimum": 0}
+      }
+    }
+  }
+}

@@ -21,7 +21,7 @@ the submission repository.
 
 | Check | Result |
 |---|---:|
-| Unit and contract tests | 10 passed |
+| Unit, contract, and evidence tests | 13 passed |
 | Python discovery | 74 raw / 61 processed / 13,807 lines |
 | Python AST parse rate | 61/61 (100%) |
 | Baseline Neo4j nodes | 62,375 unique / 62,375 total |
@@ -29,7 +29,7 @@ the submission repository.
 | Modified/replayed nodes | 62,397 unique / 62,397 total |
 | Modified/replayed edges | 77,849 unique / 77,849 total |
 | MongoDB source documents | 61 IDs / 61 documents |
-| Spark checkpoint restart | Kafka metadata offset 126 -> 128 |
+| Spark checkpoint restart | Captured dynamically in `evidence/runtime/verification.json` |
 | Neo4j DLQ records | 0 |
 
 ## Requirements
@@ -157,18 +157,34 @@ This is an educational file-local CPG rather than a replacement for Joern:
 
 These limits should be stated explicitly in the Jupyter Book.
 
-## Tests and book
+## Capture evidence and build the book
+
+Run this sequence only after the full repository baseline has reached Neo4j and
+MongoDB and the replay modification is present in `optimum/version.py`:
 
 ```powershell
 python -m pytest
+python scripts/capture_replay_evidence.py
 python scripts/generate_book.py
+python scripts/validate_notebooks.py
 jupyter-book build --html --strict
 ```
 
-The book contains captured real outputs from the locked Optimum commit. Re-run
-`generate_book.py` while the stack and source clone are available if the demo is
-repeated. The
-GitHub workflow publishes `_build/site` through GitHub Pages.
+`capture_replay_evidence.py` performs four measured stages: locked baseline,
+modified file, forced unchanged replay, and Spark restart plus replay. It backs
+up and restores the modified source bytes, polls both sinks, verifies unchanged
+file metadata by digest, and writes `verification.json` only when every
+assertion passes.
+
+`generate_book.py` does not manufacture outputs or execution counts. It executes
+every code cell with `nbclient`, records the evidence SHA-256 in notebook
+metadata, and replaces the committed notebooks only after all seven execute
+successfully. `validate_notebooks.py` rejects stale evidence, missing outputs,
+tracebacks, absent PASS assertions, or screenshots that are too small.
+
+The GitHub workflow validates the committed executed notebooks and publishes
+`_build/html` through GitHub Pages; CI intentionally does not require Kafka or
+database services.
 
 ## Troubleshooting
 

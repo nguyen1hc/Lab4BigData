@@ -1,36 +1,35 @@
 # Final submission checklist
 
-The implementation and executable evidence are complete. The following actions
-require the team's GitHub account or a manual desktop UI and therefore are not
-automated in this workspace.
+Complete the automated evidence sequence below before publishing. The final
+GitHub Pages enablement and incognito review still require the team's account.
 
-## 1. Capture the two UI images
+## 1. Capture one consistent evidence run and the two UI images
 
-1. Open Neo4j Browser at <http://localhost:7474> and authenticate with the
+1. With all Docker services running and the 61-file repository state loaded, run:
+
+   ```powershell
+   python scripts/capture_replay_evidence.py
+   ```
+
+   Continue only when all 16 replay assertions report `true`.
+2. Open Neo4j Browser at <http://localhost:7474> and authenticate with the
    password stored in ignored `.env`.
-2. Run:
-
-   ```cypher
-   MATCH p=(source:CPGNode)-[edge:CPG_EDGE]->(target:CPGNode)
-   RETURN p
-   LIMIT 50;
-   ```
-
-3. Save the graph screenshot as `book/figures/neo4j-browser.png`.
+3. Run a graph query scoped to the replay file ID printed in
+   `evidence/runtime/verification.json`, then save the result as
+   `book/figures/neo4j-browser.png`.
 4. Open MongoDB Compass with `mongodb://localhost:27017`, select
-   `lab04.source_metadata`, and filter on:
-
-   ```json
-   {"repo_id": "huggingface/optimum"}
-   ```
-
-5. Save the document screenshot as `book/figures/mongodb-ui.png`.
-6. Regenerate and rebuild:
+   `lab04.source_metadata`, and filter on the replay file `_id`. Save the final
+   document as `book/figures/mongodb-ui.png`.
+5. Execute the notebooks, validate provenance, and build:
 
    ```powershell
    python scripts/generate_book.py
+   python scripts/validate_notebooks.py
    jupyter-book build --html --strict
    ```
+
+6. Confirm that notebook metadata references the SHA-256 of the same
+   `verification.json` and that no notebook contains a traceback.
 
 ## 2. Publish the book
 
